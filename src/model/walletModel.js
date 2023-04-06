@@ -1,4 +1,4 @@
-import Observable from './observable.js';
+import Observable from "./observable.js";
 
 class WalletModel extends Observable {
   constructor() {
@@ -30,7 +30,6 @@ class WalletModel extends Observable {
     this.walletData.userWalletList.forEach(el => {
       if (el.name === clickedTarget) {
         if (el.count === 0) {
-          alert(`남은 개수가 부족합니다.`);
           return;
         }
         this.calculateSum(clickedTarget);

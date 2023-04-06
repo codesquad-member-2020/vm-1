@@ -5,8 +5,8 @@ class ProductView {
     this.vendingMachineModel.subscribe(this.render.bind(this));
   }
 
-  render({ productData }) {
-    const productListEle = this.element.querySelector('.product_list');
+  render({ productData, change }) {
+    const productListEle = this.element.querySelector(".product_list");
     const productHTML = productData.reduce((html, item) => {
       return (html += `
         <li>
@@ -14,18 +14,24 @@ class ProductView {
           <p class="product_name">${item.name}</p>
           <p class="product_price">${item.price}</p>
         </li>
-      `)
-    }, '');
+      `);
+    }, "");
 
     productListEle.innerHTML = productHTML;
-    this.active(productListEle, productData);
+    this.active(productListEle, productData, change);
   }
 
-  active(productListEle, productData) {
-    productData.forEach((ele, idx) => {
-      if(ele.active) productListEle.children[idx].className = 'active';
-      else productListEle.children[idx].className = '';
-    })
+  active(productListEle, productData, change) {
+    if (change) {
+      productData.forEach((ele, idx) => {
+        productListEle.children[idx].className = "";
+      });
+    } else {
+      productData.forEach((ele, idx) => {
+        if (ele.active) productListEle.children[idx].className = "active";
+        else productListEle.children[idx].className = "";
+      });
+    }
   }
 }
 
